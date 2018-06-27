@@ -1,0 +1,47 @@
+buildscript {
+	ext {
+		springBootVersion = '2.0.3.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'io.github.alexbogovich'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 10
+
+repositories {
+	mavenCentral()
+}
+
+
+dependencies {
+	compile('javax.xml.bind:jaxb-api:2.3.0')
+	compile('com.cosium.spring.data:spring-data-jpa-entity-graph:2.0.0')
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	compile('org.springframework.boot:spring-boot-starter-data-rest')
+	runtime('org.springframework.boot:spring-boot-devtools')
+	runtime('com.h2database:h2')
+	compileOnly('org.projectlombok:lombok:1.18.0')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+
+	testCompile('org.junit.jupiter:junit-jupiter-api')
+	testCompile('org.junit.jupiter:junit-jupiter-params')
+	testRuntime('org.junit.jupiter:junit-jupiter-engine')
+}
+
+test {
+	useJUnitPlatform()
+	testLogging {
+		events "passed", "skipped", "failed"
+	}
+}
